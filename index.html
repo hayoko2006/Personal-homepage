@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>何柚可 | Hayoko</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #64748b;
+            --accent-color: #f472b6;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --light-text: #64748b;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', 'Noto Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .language-switcher {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            min-width: 80px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 py-4 px-6 md:px-12 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600">何柚可 | Hayoko</a>
+            
+            <div class="flex items-center space-x-6">
+                <a href="#about" class="nav-link" data-lang-key="about">关于</a>
+                <a href="#skills" class="nav-link" data-lang-key="skills">技能</a>
+                <a href="#projects" class="nav-link" data-lang-key="projects">项目</a>
+                <a href="#contact" class="nav-link" data-lang-key="contact">联系</a>
+                
+                <div class="language-switcher">
+                    <button id="current-lang" class="flex items-center space-x-1">
+                        <span id="lang-text">中文</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="zh-CN">中文</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="en-US">English</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="pt-32 pb-20 px-6 md:px-12 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                <span data-lang-key="hero.title">你好，我是何柚可</span>
+                <span class="block text-blue-600" data-lang-key="hero.subtitle">Hayoko</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto" data-lang-key="hero.description">
+                内容创作者，FreeBSD中文社区成员，热爱计算机、医学和美剧
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="btn-primary text-white px-8 py-3 rounded-full font-medium">
+                    <span data-lang-key="hero.contact">联系我</span>
+                </a>
+                <a href="#projects" class="bg-white text-blue-600 border border-blue-600 px-8 py-3 rounded-full font-medium hover:bg-blue-50 transition-all duration-300">
+                    <span data-lang-key="hero.projects">查看项目</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="py-20 px-6 md:px-12 section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-lang-key="about.title">关于我</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-semibold mb-4" data-lang-key="about.personal">个人信息</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-user-circle text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.name">中文名：何柚可</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-globe text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.website">个人主页：hayoko.cn</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-birthday-cake text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.birth">出生日期：2006年</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.birthplace">出生地：中国安徽</span>
+                        </li>
+                    </ul>
+                    
+                    <h3 class="text-2xl font-semibold mt-8 mb-4" data-lang-key="about.experience">个人经历</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-briefcase text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.creator">内容创作者</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-hotel text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.hotel">曾做过酒店前台</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-code text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.freebsd">FreeBSD中文社区成员</span>
+                        </li>
+                    </ul>
+                    
+                    <h3 class="text-2xl font-semibold mt-8 mb-4" data-lang-key="about.interests">兴趣爱好</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-laptop-code text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.computer">计算机</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-heartbeat text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.medicine">医学</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-tv text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.tv">看美剧</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="order-1 md:order-2 flex flex-col items-center">
+                    <div class="w-64 h-64 mb-6 rounded-full overflow-hidden border-4 border-blue-600 shadow-lg">
+                        <img src="my-photo-1.png" alt="何柚可" class="w-full h-full object-cover">
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg w-full">
+                        <h3 class="text-2xl font-semibold mb-6" data-lang-key="about.bio">个人简介</h3>
+                        <p class="text-gray-700 mb-6" data-lang-key="about.bio1">
+                            嗨，我是何柚可（Hayoko），一名充满激情的软件开发人员，拥有酒店管理、销售和互联网运营的多元化专业背景。我是FreeBSD中文社区的成员，喜欢为开源项目做贡献。
+                        </p>
+                        <p class="text-gray-700 mb-6" data-lang-key="about.bio2">
+                            我的兴趣包括计算机科学、医学和美国电视节目。目前我正在从事Web开发项目并探索AI应用，同时学习Node.js和AI技术。
+                        </p>
+                        <p class="text-gray-700" data-lang-key="about.bio3">
+                            凭借我多元化的背景，我为技术解决方案带来了独特的视角，这些解决方案架起了业务和技术之间的桥梁。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能展示 -->
+    <section id="skills" class="py-20 px-6 md:px-12 bg-gray-50 section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-lang-key="skills.title">技术技能</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="skill-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2" data-lang-key="skills.web">Web开发</h3>
+                    <p class="text-gray-600" data-lang-key="skills.webDesc">
+                        熟悉HTML5、CSS3、JavaScript等前端技术，能够构建响应式网站。
+                    </p>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2" data-lang-key="skills.php">PHP</h3>
+                    <p class="text-gray-600" data-lang-key="skills.phpDesc">
+                        能够开发PHP应用，包括文件上传系统等功能。
+                    </p>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2" data-lang-key="skills.node">Node.js</h3>
+                    <p class="text-gray-600" data-lang-key="skills.nodeDesc">
+                        正在学习Node.js技术，探索后端开发。
+                    </p>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fab fa-freebsd"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2" data-lang-key="skills.freebsd">FreeBSD</h3>
+                    <p class="text-gray-600" data-lang-key="skills.freebsdDesc">
+                        FreeBSD中文社区成员，熟悉FreeBSD系统。
+                    </p>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2" data-lang-key="skills.ai">AI技术</h3>
+                    <p class="text-gray-600" data-lang-key="skills.aiDesc">
+                        正在学习AI技术，探索AI在Web开发中的应用。
+                    </p>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-business-time"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2" data-lang-key="skills.business">业务技能</h3>
+                    <p class="text-gray-600" data-lang-key="skills.businessDesc">
+                        拥有酒店管理、销售和互联网运营的专业背景。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目经验 -->
+    <section id="projects" class="py-20 px-6 md:px-12 section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-lang-key="projects.title">项目经验</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="project-card bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4">Fileupload</h3>
+                    <p class="text-gray-600 mb-4" data-lang-key="projects.fileupload">
+                        一个基于PHP的开源文件上传系统，可用作简单的云存储或备份工具。最初设计用于公司内部文档扫描和归档。
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">PHP</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">文件上传</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">云存储</span>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4">个人主页</h3>
+                    <p class="text-gray-600 mb-4" data-lang-key="projects.website">
+                        个人作品集网站，展示个人信息、技能和项目经验，支持中英文双语切换。
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">HTML5</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Tailwind CSS</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">响应式设计</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="py-20 px-6 md:px-12 bg-gradient-to-br from-blue-50 to-indigo-50 section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-lang-key="contact.title">联系我</h2>
+            
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <div class="space-y-6">
+                    <div class="flex items-center">
+                        <div class="text-blue-600 text-3xl mr-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold" data-lang-key="contact.email">邮箱</h3>
+                            <p class="text-gray-600">hayoko@hayoko.cn</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="text-blue-600 text-3xl mr-4">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold" data-lang-key="contact.website">个人主页</h3>
+                            <p class="text-gray-600">https://hayoko.cn</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="text-blue-600 text-3xl mr-4">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold" data-lang-key="contact.github">GitHub</h3>
+                            <p class="text-gray-600">https://github.com/hayoko2006</p>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-10 px-6 md:px-12">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold">何柚可 | Hayoko</h3>
+                    <p class="text-gray-400 mt-2" data-lang-key="footer.copyright">© 2006-现在 何柚可</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/hayoko2006" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="https://hayoko.cn" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-globe text-2xl"></i>
+                    </a>
+                    <a href="mailto:hayoko@hayoko.cn" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p data-lang-key="footer.quote">💗做一个高认知的人💗</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // 滚动动画
+        const sections = document.querySelectorAll('.section');
+        
+        function checkVisibility() {
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top < windowHeight * 0.85 && rect.bottom > 0) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+
+        // 语言切换
+        const translations = {
+            'zh-CN': {
+                'about': '关于',
+                'skills': '技能',
+                'projects': '项目',
+                'contact': '联系',
+                'hero.title': '你好，我是何柚可',
+                'hero.subtitle': 'Hayoko',
+                'hero.description': '内容创作者，FreeBSD中文社区成员，热爱计算机、医学和美剧',
+                'hero.contact': '联系我',
+                'hero.projects': '查看项目',
+                'about.title': '关于我',
+                'about.personal': '个人信息',
+                'about.name': '中文名：何柚可',
+                'about.website': '个人主页：hayoko.cn',
+                'about.birth': '出生日期：2006年',
+                'about.birthplace': '出生地：中国安徽',
+                'about.experience': '个人经历',
+                'about.creator': '内容创作者',
+                'about.hotel': '曾做过酒店前台',
+                'about.freebsd': 'FreeBSD中文社区成员',
+                'about.interests': '兴趣爱好',
+                'about.computer': '计算机',
+                'about.medicine': '医学',
+                'about.tv': '看美剧',
+                'about.bio': '个人简介',
+                'about.bio1': '嗨，我是何柚可（Hayoko），一名充满激情的软件开发人员，拥有酒店管理、销售和互联网运营的多元化专业背景。我是FreeBSD中文社区的成员，喜欢为开源项目做贡献。',
+                'about.bio2': '我的兴趣包括计算机科学、医学和美国电视节目。目前我正在从事Web开发项目并探索AI应用，同时学习Node.js和AI技术。',
+                'about.bio3': '凭借我多元化的背景，我为技术解决方案带来了独特的视角，这些解决方案架起了业务和技术之间的桥梁。',
+                'skills.title': '技术技能',
+                'skills.web': 'Web开发',
+                'skills.webDesc': '熟悉HTML5、CSS3、JavaScript等前端技术，能够构建响应式网站。',
+                'skills.php': 'PHP',
+                'skills.phpDesc': '能够开发PHP应用，包括文件上传系统等功能。',
+                'skills.node': 'Node.js',
+                'skills.nodeDesc': '正在学习Node.js技术，探索后端开发。',
+                'skills.freebsd': 'FreeBSD',
+                'skills.freebsdDesc': 'FreeBSD中文社区成员，熟悉FreeBSD系统。',
+                'skills.ai': 'AI技术',
+                'skills.aiDesc': '正在学习AI技术，探索AI在Web开发中的应用。',
+                'skills.business': '业务技能',
+                'skills.businessDesc': '拥有酒店管理、销售和互联网运营的专业背景。',
+                'projects.title': '项目经验',
+                'projects.fileupload': '一个基于PHP的开源文件上传系统，可用作简单的云存储或备份工具。最初设计用于公司内部文档扫描和归档。',
+                'projects.website': '个人作品集网站，展示个人信息、技能和项目经验，支持中英文双语切换。',
+                'contact.title': '联系我',
+                'contact.email': '邮箱',
+                'contact.website': '个人主页',
+                'contact.github': 'GitHub',
+
+                'footer.copyright': '© 2006-现在 何柚可',
+                'footer.quote': '💗做一个高认知的人💗'
+            },
+            'en-US': {
+                'about': 'About',
+                'skills': 'Skills',
+                'projects': 'Projects',
+                'contact': 'Contact',
+                'hero.title': 'Hello, I am Hayoko',
+                'hero.subtitle': '何柚可',
+                'hero.description': 'Content creator, member of FreeBSD Chinese community, passionate about computer science, medicine, and American TV shows',
+                'hero.contact': 'Contact Me',
+                'hero.projects': 'View Projects',
+                'about.title': 'About Me',
+                'about.personal': 'Personal Information',
+                'about.name': 'Chinese Name: 何柚可',
+                'about.website': 'Personal Website: hayoko.cn',
+                'about.birth': 'Date of Birth: 2006',
+                'about.birthplace': 'Birthplace: Anhui, China',
+                'about.experience': 'Personal Experience',
+                'about.creator': 'Content Creator',
+                'about.hotel': 'Former Hotel Receptionist',
+                'about.freebsd': 'Member of FreeBSD Chinese Community',
+                'about.interests': 'Interests',
+                'about.computer': 'Computer Science',
+                'about.medicine': 'Medicine',
+                'about.tv': 'Watching American TV Shows',
+                'about.bio': 'Biography',
+                'about.bio1': 'Hi, I\'m Hayoko, a passionate software developer with diverse professional background in hotel management, sales, and internet operations. I\'m a member of the FreeBSD Chinese community and enjoy contributing to open source projects.',
+                'about.bio2': 'My interests include computer science, medicine, and American TV shows. Currently, I\'m working on web development projects and exploring AI applications, while learning Node.js and AI technologies.',
+                'about.bio3': 'With my diverse background, I bring unique perspectives to tech solutions that bridge business and technology.',
+                'skills.title': 'Technical Skills',
+                'skills.web': 'Web Development',
+                'skills.webDesc': 'Familiar with HTML5, CSS3, JavaScript and other front-end technologies, capable of building responsive websites.',
+                'skills.php': 'PHP',
+                'skills.phpDesc': 'Able to develop PHP applications, including file upload systems and other functions.',
+                'skills.node': 'Node.js',
+                'skills.nodeDesc': 'Learning Node.js technology and exploring back-end development.',
+                'skills.freebsd': 'FreeBSD',
+                'skills.freebsdDesc': 'Member of FreeBSD Chinese community, familiar with FreeBSD system.',
+                'skills.ai': 'AI Technology',
+                'skills.aiDesc': 'Learning AI technology and exploring its applications in web development.',
+                'skills.business': 'Business Skills',
+                'skills.businessDesc': 'Professional background in hotel management, sales, and internet operations.',
+                'projects.title': 'Project Experience',
+                'projects.fileupload': 'An open-source PHP-based file upload system that can be used as a simple cloud storage or backup tool. Originally designed for internal company document scanning and archiving.',
+                'projects.website': 'Personal portfolio website showcasing personal information, skills, and project experience, supporting bilingual switching between Chinese and English.',
+                'contact.title': 'Contact Me',
+                'contact.email': 'Email',
+                'contact.website': 'Website',
+                'contact.github': 'GitHub',
+
+                'footer.copyright': '© 2006-Present Hayoko',
+                'footer.quote': '💗Be a person with high cognition💗'
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.getElementById('lang-text').textContent = lang === 'zh-CN' ? '中文' : 'English';
+            
+            const elements = document.querySelectorAll('[data-lang-key]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // 语言切换事件
+        document.querySelectorAll('.language-dropdown a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                changeLanguage(lang);
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
